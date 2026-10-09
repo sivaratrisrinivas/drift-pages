@@ -2,7 +2,7 @@
 
 Pricing-page drift alarms for [Monid](https://github.com/monid-ai/monid) connectors. A prototype by Srinivas Sivaratri. Not affiliated with Monid.
 
-**Demo:** https://drift-pages.onrender.com · **Video (75 s):** [demo.mp4](https://drift-pages.onrender.com/demo.mp4) · **Eval:** [eval/RESULTS.md](eval/RESULTS.md)
+**Demo:** https://drift-pages.onrender.com · **Video (86 s, silent, captioned):** [demo.mp4](https://drift-pages.onrender.com/demo.mp4) · **Eval:** [eval/RESULTS.md](eval/RESULTS.md)
 
 **Problem.** Monid's drift guard (`deno task drift`, design D28) only runs where a vendor publishes machine-readable pricing. [`scripts/drift/contract.ts`](https://github.com/monid-ai/monid/blob/main/scripts/drift/contract.ts) says suites ship "ONLY when the vendor publishes a machine-readable surface", and today that is Apify. Other providers, like Firecrawl ([provider.ts](https://github.com/monid-ai/monid/blob/main/connectors/firecrawl/provider.ts): "Firecrawl exposes no machine-readable pricing surface, so there is no drift suite for it"), rely on `test:live` and the per-run mismatch signal, which fires on a real run. Many endpoint files already cite a public pricing URL next to the pinned rate.
 
