@@ -77,14 +77,26 @@ async function gemini(call: LlmCall, model: string): Promise<string> {
                 "Content-Type": "application/json",
                 "x-goog-api-key": key,
             },
-            body: JSON.stringify({
-                systemInstruction: { parts: [{ text: call.system }] },
-                contents: [{ role: "user", parts: [{ text: call.user }] }],
-                generationConfig: {
-                    temperature: 0,
-                    responseMimeType: "application/json",
-                },
-            }),
+            // Gemma models on the same API take no system instruction and no
+            // JSON mode: fold the system text into the prompt instead
+            body: JSON.stringify(
+                model.startsWith("gemma")
+                    ? {
+                        contents: [{
+                            role: "user",
+                            parts: [{ text: `${call.system}\n\n${call.user}` }],
+                        }],
+                        generationConfig: { temperature: 0 },
+                    }
+                    : {
+                        systemInstruction: { parts: [{ text: call.system }] },
+                        contents: [{ role: "user", parts: [{ text: call.user }] }],
+                        generationConfig: {
+                            temperature: 0,
+                            responseMimeType: "application/json",
+                        },
+                    },
+            ),
         },
     );
     const body = await res.json();
@@ -103,7 +115,12 @@ async function gemini(call: LlmCall, model: string): Promise<string> {
         (err as any).status = res.status;
         throw err;
     }
-    return body.candidates[0].content.parts.map((p: any) => p.text).join("");
+    const text: string = body.candidates[0].content.parts
+        .filter((p: any) => !p.thought)
+        .map((p: any) => p.text ?? "").join("");
+    // tolerate a fenced answer
+    const fenced = text.match(/```(?:json)?\s*([\s\S]*?)```/);
+    return fenced ? fenced[1] : text;
 }
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
