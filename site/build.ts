@@ -90,7 +90,7 @@ video{width:100%;max-width:960px;border-radius:10px;border:1px solid var(--line)
 <pre id="repinjson">${esc(repin)}</pre>
 <h2 id="eval">3. Eval: 20 saved pages</h2>
 <p>Base pages are the real public pages fetched on 2026-10-10. Price, unit and pricing-model changes are planted by hand, alongside no-change controls. A case passes only if the set of (check, docId) findings matches exactly. Click a row to see the planted edit, the extracted table and the findings.</p>
-<p class="muted">${[...kinds].map(([k, v]) => `${esc(k)}: ${v.pass}/${v.n}`).join(" · ")}. Model: ${esc(summary.models.join(", "))}. Run at ${esc(summary.ranAt)}.</p>
+<p class="muted">${[...kinds].map(([k, v]) => `${esc(k)}: ${v.pass}/${v.n}`).join(" · ")}. Free-tier models used (recorded per case in the table detail): ${esc(summary.models.join(", "))}. Run at ${esc(summary.ranAt)}.</p>
 <table id="evaltable"><tr><th>#</th><th>Provider</th><th>Case</th><th>Expected</th><th>Got</th><th>Result</th></tr>
 ${rows}
 </table>

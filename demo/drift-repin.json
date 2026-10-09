@@ -1,0 +1,46 @@
+[
+  {
+    "docId": "firecrawl#scrape",
+    "line": "json",
+    "pinned": 4,
+    "live": 5,
+    "source": {
+      "url": "https://docs.firecrawl.dev/billing",
+      "quote": "| JSON format (LLM extraction) | +5 credits / page |",
+      "snapshot": "69820ff3601f"
+    }
+  },
+  {
+    "docId": "firecrawl#crawl",
+    "line": "json",
+    "pinned": 4,
+    "live": 5,
+    "source": {
+      "url": "https://docs.firecrawl.dev/billing",
+      "quote": "| JSON format (LLM extraction) | +5 credits / page |",
+      "snapshot": "69820ff3601f"
+    }
+  },
+  {
+    "docId": "firecrawl#batch/scrape",
+    "line": "json",
+    "pinned": 4,
+    "live": 5,
+    "source": {
+      "url": "https://docs.firecrawl.dev/billing",
+      "quote": "| JSON format (LLM extraction) | +5 credits / page |",
+      "snapshot": "69820ff3601f"
+    }
+  },
+  {
+    "docId": "firecrawl#search",
+    "line": "json",
+    "pinned": 4,
+    "live": 5,
+    "source": {
+      "url": "https://docs.firecrawl.dev/billing",
+      "quote": "| JSON format (LLM extraction) | +5 credits / page |",
+      "snapshot": "69820ff3601f"
+    }
+  }
+]

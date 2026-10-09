@@ -1,5 +1,4 @@
 .output/
-site/dist/
 .env
 *.key
 .vercel

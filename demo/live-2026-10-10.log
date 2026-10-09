@@ -1,0 +1,15 @@
+Task drift:pages deno run --allow-read --allow-write --allow-env --allow-net scripts/drift-pages.ts
+firecrawl: checking 8 pinned docs (monid@b3e7b0c) against public pricing pages
+  https://docs.firecrawl.dev/billing: 29 rows, 1 rejected by the quote guard (gemini:gemini-3.5-flash, replayed)
+
+firecrawl: all 8 docs match the published page
+exa: checking 2 pinned docs (monid@b3e7b0c) against public pricing pages
+  https://exa.ai/pricing: 18 rows, 0 rejected by the quote guard (gemini:gemini-3.8-flash, replayed)
+
+exa: all 2 docs match the published page
+apollo: checking 8 pinned docs (monid@b3e7b0c) against public pricing pages
+  https://docs.apollo.io/docs/api-pricing: 18 rows, 0 rejected by the quote guard (groq:openai/gpt-oss-120b, replayed)
+
+apollo: all 8 docs match the published page
+exit code: 0
+Sat Oct 10 03:37:21 IST 2026

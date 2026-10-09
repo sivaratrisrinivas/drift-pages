@@ -1,0 +1,15 @@
+$ deno task drift:pages --provider firecrawl   # JSON format now +5
+firecrawl: checking 8 pinned docs (monid@b3e7b0c) against public pricing pages
+  https://docs.firecrawl.dev/billing: 29 rows, 0 rejected by the quote guard (gemini:gemini-3.8-flash, replayed)
+  4 rate re-pin(s) written to .output/drift-repin.json (pins NOT edited)
+
+firecrawl drift (4):
+  firecrawl#scrape [rate] json: pinned 4 per page, page says 5 (5 credits per page)
+      evidence: "| JSON format (LLM extraction) | +5 credits / page |" (https://docs.firecrawl.dev/billing)
+  firecrawl#crawl [rate] json: pinned 4 per page, page says 5 (5 credits per page)
+      evidence: "| JSON format (LLM extraction) | +5 credits / page |" (https://docs.firecrawl.dev/billing)
+  firecrawl#batch/scrape [rate] json: pinned 4 per page, page says 5 (5 credits per page)
+      evidence: "| JSON format (LLM extraction) | +5 credits / page |" (https://docs.firecrawl.dev/billing)
+  firecrawl#search [rate] json: pinned 4 per page, page says 5 (5 credits per page)
+      evidence: "| JSON format (LLM extraction) | +5 credits / page |" (https://docs.firecrawl.dev/billing)
+exit code: 1
