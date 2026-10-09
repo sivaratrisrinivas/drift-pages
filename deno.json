@@ -1,0 +1,21 @@
+{
+    "tasks": {
+        "drift:pages": "deno run --allow-read --allow-write --allow-env --allow-net scripts/drift-pages.ts",
+        "eval": "deno run --allow-read --allow-write --allow-env --allow-net eval/run.ts",
+        "eval:build": "deno run --allow-read --allow-write eval/build.ts",
+        "snapshot": "deno run --allow-read --allow-write --allow-env --allow-net scripts/drift/pages/snapshot.ts",
+        "pins:export": "deno run --allow-read --allow-write scripts/pins-export.ts",
+        "site": "deno run --allow-read --allow-write site/build.ts",
+        "test": "deno test --allow-read --allow-env --allow-write"
+    },
+    "imports": {
+        "@cliffy/command": "jsr:@cliffy/command@^1.2.1",
+        "linkedom": "npm:linkedom@^0.18.12",
+        "@std/assert": "jsr:@std/assert@^1.0.19",
+        "@std/encoding": "jsr:@std/encoding@^1.0.10",
+        "zod": "npm:zod@4.3.6"
+    },
+    "fmt": { "indentWidth": 4, "exclude": [".output/", "snapshots/", "eval/pages/", "fixtures/", "site/dist/"] },
+    "lint": { "exclude": [".output/", "site/dist/"] },
+    "exclude": [".output/"]
+}

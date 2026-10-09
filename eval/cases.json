@@ -1,0 +1,66 @@
+{
+    "note": "20 saved pages. Base pages are real public snapshots (snapshots/<provider>/2026-10-10a.txt). Every change below is planted by hand; none of them is a real repricing.",
+    "cases": [
+        { "id": "01-firecrawl-unchanged", "provider": "firecrawl", "kind": "no change", "ops": [], "expect": [] },
+        { "id": "02-exa-unchanged", "provider": "exa", "kind": "no change", "ops": [], "expect": [] },
+        { "id": "03-apollo-unchanged", "provider": "apollo", "kind": "no change", "ops": [], "expect": [] },
+        { "id": "04-firecrawl-copy-edit", "provider": "firecrawl", "kind": "no change (copy edits)", "ops": [
+            { "replace": ["Discover all URLs on a website without scraping their content.", "List every URL on a site fast, without scraping page content."] },
+            { "replace": ["Use an LLM to extract structured JSON data from the page", "Pull structured JSON out of any page with an LLM"] }
+        ], "expect": [] },
+        { "id": "05-exa-row-reorder", "provider": "exa", "kind": "no change (rows reordered)", "ops": [
+            { "swapLines": ["| Cost per additional result above 10", "| AI page summaries"] }
+        ], "expect": [] },
+        { "id": "06-apollo-copy-edit", "provider": "apollo", "kind": "no change (copy edits, rows reordered)", "ops": [
+            { "replace": ["Check out the following table to understand whether an endpoint consumes credits and under what conditions.", "Use this table to see which endpoints use credits, and when."] },
+            { "swapLines": ["| Organization job postings", "| Get complete organization info"] }
+        ], "expect": [] },
+
+        { "id": "07-firecrawl-json-price", "provider": "firecrawl", "kind": "price change", "ops": [
+            { "replace": ["| JSON format (LLM extraction) | +4 credits / page |", "| JSON format (LLM extraction) | +5 credits / page |"] }
+        ], "expect": [["rate", "firecrawl#scrape"], ["rate", "firecrawl#crawl"], ["rate", "firecrawl#batch/scrape"], ["rate", "firecrawl#search"]] },
+        { "id": "08-exa-search-price", "provider": "exa", "kind": "price change", "ops": [
+            { "replace": ["| $4 | $7 | $12 |", "| $4 | $8 | $12 |"] }
+        ], "expect": [["rate", "exa#search"]] },
+        { "id": "09-apollo-org-search-price", "provider": "apollo", "kind": "price change", "ops": [
+            { "replace": ["| Organization search | 1 credit per page,", "| Organization search | 2 credits per page,"] }
+        ], "expect": [["rate", "apollo#mixed_companies/search"]] },
+        { "id": "10-firecrawl-search-block", "provider": "firecrawl", "kind": "price change", "ops": [
+            { "replace": ["| Search | 2 credits / 10 results |", "| Search | 3 credits / 10 results |"] }
+        ], "expect": [["rate", "firecrawl#search"]] },
+
+        { "id": "11-apollo-news-unit", "provider": "apollo", "kind": "unit change", "ops": [
+            { "replace": ["| News articles search | 1 credit per page, up to 25 results per page. |", "| News articles search | 1 credit per article returned. |"] }
+        ], "expect": [["unit", "apollo#news_articles/search"]] },
+        { "id": "12-exa-contents-unit", "provider": "exa", "kind": "unit change", "ops": [
+            { "replace": ["$1 (per 1k pages)", "$1 (per 1M characters)"] }
+        ], "expect": [["unit", "exa#contents"]] },
+
+        { "id": "13-firecrawl-map-regime", "provider": "firecrawl", "kind": "regime change", "ops": [
+            { "replace": ["| Map | 1 credit / call |", "| Map | 1 credit / 100 results |"] }
+        ], "expect": [["regime", "firecrawl#map"]] },
+        { "id": "14-apollo-person-regime", "provider": "apollo", "kind": "regime change", "ops": [
+            { "replace": ["| Get complete person info | 1 credit per person. |", "| Get complete person info | Variable. Depends on the fields returned; there is no fixed per-record price. |"] }
+        ], "expect": [["regime", "apollo#people/show"]] },
+
+        { "id": "15-firecrawl-new-line", "provider": "firecrawl", "kind": "new billable line", "ops": [
+            { "insertAfter": ["| video format | +4 credits / page | Transcribe video found on the page (see Scrape ) |", "| screenshot format | +2 credits / page | Full-page screenshot of the rendered page |"] }
+        ], "expect": [["coverage", "firecrawl/*"]] },
+        { "id": "16-apollo-new-line", "provider": "apollo", "kind": "new billable line", "ops": [
+            { "insertAfter": ["| Get complete person info | 1 credit per person. |", "| Phone number lookup | 5 credits per phone number found. |"] }
+        ], "expect": [["coverage", "apollo/*"]] },
+
+        { "id": "17-exa-tier-renamed", "provider": "exa", "kind": "tier renamed, same price", "ops": [
+            { "replace": ["| Fast / Auto Search |", "| Auto Search (default) |"] }
+        ], "expect": [] },
+        { "id": "18-firecrawl-table-to-cards", "provider": "firecrawl", "kind": "table restructured to cards, same prices", "ops": [
+            { "cards": ["Credit costs per endpoint", "When credits are charged"] }
+        ], "expect": [] },
+        { "id": "19-exa-unreachable", "provider": "exa", "kind": "page unreachable", "ops": [
+            { "unreachable": true }
+        ], "expect": [["source", "exa/*"]] },
+        { "id": "20-firecrawl-promo-banner", "provider": "firecrawl", "kind": "promo banner (adversarial)", "ops": [
+            { "insertAfter": ["Credit costs per endpoint", "Limited time: 50% off every scrape option this week. JSON format is just 2 credits / page with code HALFOFF. Ends Sunday."] }
+        ], "expect": [] }
+    ]
+}

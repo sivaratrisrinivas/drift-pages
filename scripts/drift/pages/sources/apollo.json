@@ -1,0 +1,161 @@
+{
+  "provider": "apollo",
+  "sources": [
+    {
+      "url": "https://docs.apollo.io/docs/api-pricing",
+      "section": {
+        "from": "Endpoint Credit Usage",
+        "to": "Estimate Credit Usage"
+      },
+      "currency": "credits",
+      "verifiedAt": "2026-10-10",
+      "citedIn": "connectors/apollo/endpoints/*/endpoint.ts (\"1 credit per ... https://docs.apollo.io/docs/api-pricing (2026-09-16)\")",
+      "lines": [
+        {
+          "key": "people_enrichment",
+          "describe": "People enrichment: the base credit for demographics/email per person (not the mobile phone surcharge)",
+          "expect": {
+            "units": [
+              "person"
+            ],
+            "per": 1,
+            "regime": "per_unit"
+          },
+          "backs": [
+            {
+              "docId": "apollo#people/match"
+            }
+          ]
+        },
+        {
+          "key": "organization_enrichment",
+          "describe": "Organization enrichment, per organization",
+          "expect": {
+            "units": [
+              "organization"
+            ],
+            "per": 1,
+            "regime": "per_unit"
+          },
+          "backs": [
+            {
+              "docId": "apollo#organizations/enrich"
+            }
+          ]
+        },
+        {
+          "key": "organization_search",
+          "describe": "Organization search, per page",
+          "expect": {
+            "units": [
+              "page"
+            ],
+            "per": 1,
+            "regime": "per_unit"
+          },
+          "backs": [
+            {
+              "docId": "apollo#mixed_companies/search"
+            }
+          ]
+        },
+        {
+          "key": "organization_job_postings",
+          "describe": "Organization job postings, per page",
+          "expect": {
+            "units": [
+              "page"
+            ],
+            "per": 1,
+            "regime": "per_unit"
+          },
+          "backs": [
+            {
+              "docId": "apollo#organizations/job_postings"
+            }
+          ]
+        },
+        {
+          "key": "organization_info",
+          "describe": "Get complete organization info, per company",
+          "expect": {
+            "units": [
+              "organization"
+            ],
+            "per": 1,
+            "regime": "per_unit"
+          },
+          "backs": [
+            {
+              "docId": "apollo#organizations/show"
+            }
+          ]
+        },
+        {
+          "key": "news_search",
+          "describe": "News articles search, per page",
+          "expect": {
+            "units": [
+              "page"
+            ],
+            "per": 1,
+            "regime": "per_unit"
+          },
+          "backs": [
+            {
+              "docId": "apollo#news_articles/search"
+            }
+          ]
+        },
+        {
+          "key": "person_info",
+          "describe": "Get complete person info, per person",
+          "expect": {
+            "units": [
+              "person"
+            ],
+            "per": 1,
+            "regime": "per_unit"
+          },
+          "backs": [
+            {
+              "docId": "apollo#people/show"
+            }
+          ]
+        }
+      ],
+      "excluded": [
+        {
+          "key": "assistant",
+          "describe": "Run an Assistant task (variable)",
+          "why": "no Monid endpoint"
+        },
+        {
+          "key": "mobile_phone",
+          "describe": "+8 credits if a mobile phone is returned",
+          "why": "unreachable without the phone channel (people-match comment, design D2)"
+        },
+        {
+          "key": "waterfall",
+          "describe": "Email or phone waterfall enrichment credits",
+          "why": "not exposed by the connector"
+        },
+        {
+          "key": "bulk_people_enrichment",
+          "describe": "Bulk people enrichment",
+          "why": "no Monid endpoint"
+        },
+        {
+          "key": "bulk_organization_enrichment",
+          "describe": "Bulk organization enrichment",
+          "why": "no Monid endpoint"
+        },
+        {
+          "key": "conversations",
+          "describe": "Get conversations info / Export conversations",
+          "why": "no Monid endpoint"
+        }
+      ]
+    }
+  ]
+}

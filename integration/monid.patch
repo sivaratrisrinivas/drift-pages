@@ -1,0 +1,62 @@
+diff --git a/deno.json b/deno.json
+index 133f04a..13c0a97 100644
+--- a/deno.json
++++ b/deno.json
+@@ -22,7 +22,7 @@
+         "webhook": "deno run --unstable-kv --allow-read --allow-write --allow-env --allow-net --allow-run=git,cloudflared,tailscale scripts/webhook.ts",
+         "apify:scaffold": "deno run --allow-read --allow-write --allow-env --allow-net=api.apify.com scripts/apify-scaffold.ts",
+         "engine:estimate": "deno run --allow-read --allow-write --allow-env scripts/estimate.ts",
+-        "drift": "deno run --allow-read --allow-write --allow-env --allow-net=api.apify.com --allow-run=deno,git scripts/drift.ts"
++        "drift": "deno run --allow-read --allow-write --allow-env --allow-net=api.apify.com,docs.firecrawl.dev,exa.ai,docs.apollo.io,generativelanguage.googleapis.com,api.groq.com --allow-run=deno,git scripts/drift.ts"
+     },
+     "imports": {
+         "@cliffy/command": "jsr:@cliffy/command@^1.2.1",
+@@ -43,7 +43,9 @@
+         "@shared/core": "./shared/core/mod.ts",
+         "@shared/logging": "./shared/logging/mod.ts",
+         "pino": "npm:pino@^10.3.1",
+-        "canonicalize": "npm:canonicalize@^2.1.0"
++        "canonicalize": "npm:canonicalize@^2.1.0",
++        "linkedom": "npm:linkedom@^0.18.12",
++        "@std/encoding": "jsr:@std/encoding@^1.0.10"
+     },
+     "fmt": {
+         "indentWidth": 4,
+diff --git a/scripts/drift.ts b/scripts/drift.ts
+index edf280b..1e3ec9d 100644
+--- a/scripts/drift.ts
++++ b/scripts/drift.ts
+@@ -24,8 +24,9 @@ import type { EndpointDoc } from "@shared/core";
+ import { compileToOutput } from "./lib.ts";
+ import { type DriftSuite, suiteEnvVars, suiteToken } from "./drift/contract.ts";
+ import { apifySuite } from "./drift/apify.ts";
++import { pageSuites } from "./drift/pages.ts";
+ 
+-const SUITES: DriftSuite[] = [apifySuite];
++const SUITES: DriftSuite[] = [apifySuite, ...pageSuites];
+ 
+ const { options } = await new Command()
+     .name("drift")
+@@ -60,7 +61,7 @@ for (const provider of wanted) {
+         );
+         continue;
+     }
+-    const token = suiteToken(suite.provider);
++    const token = suite.keyless ? "" : suiteToken(suite.provider);
+     if (token === undefined) {
+         console.error(
+             `${provider}: ${
+diff --git a/scripts/drift/contract.ts b/scripts/drift/contract.ts
+index f3dc349..5a4db12 100644
+--- a/scripts/drift/contract.ts
++++ b/scripts/drift/contract.ts
+@@ -44,6 +44,9 @@ export interface DriftCtx {
+ 
+ export interface DriftSuite {
+     provider: string;
++    /** A suite that reads only PUBLIC surfaces (drift-pages: vendor pricing
++     *  pages) needs no vendor key; the runner skips the key lookup. */
++    keyless?: boolean;
+     run(ctx: DriftCtx): Promise<DriftFinding[]>;
+ }
+ 

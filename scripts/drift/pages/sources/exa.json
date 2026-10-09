@@ -1,0 +1,100 @@
+{
+  "provider": "exa",
+  "sources": [
+    {
+      "url": "https://exa.ai/pricing",
+      "section": {
+        "from": "Endpoint pricing",
+        "to": "Agent pricing"
+      },
+      "currency": "USD",
+      "verifiedAt": "2026-10-10",
+      "citedIn": "connectors/exa/endpoints/search/endpoint.ts (\"$0.007 per search, v1 vendor unit price ... pinned + re-audited\")",
+      "lines": [
+        {
+          "key": "search_base",
+          "describe": "Fast / Auto Search base price with up to 10 results",
+          "expect": {
+            "units": [
+              "request"
+            ],
+            "per": 1000,
+            "regime": "flat"
+          },
+          "backs": [
+            {
+              "docId": "exa#search",
+              "line": "call"
+            }
+          ]
+        },
+        {
+          "key": "search_extra_result",
+          "describe": "Fast / Auto Search cost per additional result above 10",
+          "expect": {
+            "units": [
+              "result",
+              "request"
+            ],
+            "per": 1000,
+            "regime": "per_unit"
+          },
+          "backs": [
+            {
+              "docId": "exa#search",
+              "line": "additional_result"
+            }
+          ]
+        },
+        {
+          "key": "contents_page",
+          "describe": "Contents base price per page",
+          "expect": {
+            "units": [
+              "page"
+            ],
+            "per": 1000,
+            "regime": "per_unit"
+          },
+          "backs": [
+            {
+              "docId": "exa#contents"
+            }
+          ]
+        }
+      ],
+      "excluded": [
+        {
+          "key": "instant_search",
+          "describe": "Instant Search prices (any line)",
+          "why": "input-gated `type` tier; the pin covers Fast / Auto"
+        },
+        {
+          "key": "deep_search",
+          "describe": "Deep Search prices (any line)",
+          "why": "input-gated `type` tier; the pin covers Fast / Auto"
+        },
+        {
+          "key": "deep_reasoning_search",
+          "describe": "Deep-Reasoning Search prices (any line)",
+          "why": "input-gated `type` tier; the pin covers Fast / Auto"
+        },
+        {
+          "key": "monitors",
+          "describe": "Monitors prices (any line)",
+          "why": "no Monid endpoint"
+        },
+        {
+          "key": "answer",
+          "describe": "Answer prices (any line)",
+          "why": "no Monid endpoint"
+        },
+        {
+          "key": "summaries",
+          "describe": "AI page summaries, any column",
+          "why": "not modeled by the connector"
+        }
+      ]
+    }
+  ]
+}

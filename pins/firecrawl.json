@@ -1,0 +1,714 @@
+{
+  "source": "github.com/monid-ai/monid (MIT), compiled catalog",
+  "monidCommit": "b3e7b0c212e73039a691642e5624fc894096a1a7",
+  "exportedAt": "2026-10-09T20:53:56.559Z",
+  "docs": [
+    {
+      "id": "firecrawl#agent",
+      "provider": "firecrawl",
+      "usage": {
+        "model": {
+          "kind": "PER_UNIT",
+          "unit": "CREDIT",
+          "every": 1,
+          "consumes": {
+            "credit": "default",
+            "amount": 1
+          },
+          "label": "agent credits",
+          "description": "credits the agent's research consumed, bounded by the `maxCredits` ceiling on the request"
+        },
+        "credits": {
+          "default": {
+            "label": "Firecrawl credits"
+          }
+        }
+      }
+    },
+    {
+      "id": "firecrawl#batch/scrape",
+      "provider": "firecrawl",
+      "usage": {
+        "model": {
+          "kind": "COMPOSITE",
+          "components": {
+            "page": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 1
+              },
+              "label": "pages scraped",
+              "description": "every URL Firecrawl returns a document for, including pages that answered 403 or 404"
+            },
+            "json": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 4
+              },
+              "label": "JSON extraction",
+              "description": "LLM extraction on every scraped page"
+            },
+            "question": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 4
+              },
+              "label": "question answering",
+              "description": "LLM answer on every scraped page"
+            },
+            "highlights": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 4
+              },
+              "label": "highlights",
+              "description": "LLM passage selection on every scraped page"
+            },
+            "audio": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 4
+              },
+              "label": "audio extraction",
+              "description": "MP3 extraction on every scraped page"
+            },
+            "video": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 4
+              },
+              "label": "video extraction",
+              "description": "video extraction on every scraped page"
+            },
+            "redact_pii": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 4
+              },
+              "label": "PII redaction",
+              "description": "redaction on every scraped page"
+            },
+            "prompt_injection_check": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 4
+              },
+              "label": "prompt-injection check",
+              "description": "the `checkPromptInjection` guard on every scraped page"
+            },
+            "lockdown": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 4
+              },
+              "label": "lockdown cache read",
+              "description": "cache-only serving on every scraped page"
+            },
+            "zero_data_retention": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 1
+              },
+              "label": "zero data retention",
+              "description": "no page content persisted beyond the batch"
+            },
+            "threat_protection_scan": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 2
+              },
+              "label": "threat-protection scan",
+              "description": "URL risk scan requested via `threatProtection.mode: normal`"
+            },
+            "x_routing": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 29
+              },
+              "label": "X (Grok) routing",
+              "description": "x.com / twitter.com URLs in the list are served through the Grok API instead of a browser"
+            },
+            "pdf_page": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 1
+              },
+              "label": "PDF pages beyond the first",
+              "description": "PDF parsing bills per page; the first of each document is covered by its page fee"
+            }
+          }
+        },
+        "credits": {
+          "default": {
+            "label": "Firecrawl credits"
+          }
+        }
+      }
+    },
+    {
+      "id": "firecrawl#batch/scrape/{id}",
+      "provider": "firecrawl",
+      "usage": {
+        "model": {
+          "kind": "FREE"
+        },
+        "credits": {}
+      }
+    },
+    {
+      "id": "firecrawl#crawl",
+      "provider": "firecrawl",
+      "usage": {
+        "model": {
+          "kind": "COMPOSITE",
+          "components": {
+            "page": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 1
+              },
+              "label": "pages crawled",
+              "description": "every page Firecrawl returns a document for, including pages that answered 403 or 404"
+            },
+            "json": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 4
+              },
+              "label": "JSON extraction",
+              "description": "LLM extraction on every crawled page"
+            },
+            "question": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 4
+              },
+              "label": "question answering",
+              "description": "LLM answer on every crawled page"
+            },
+            "highlights": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 4
+              },
+              "label": "highlights",
+              "description": "LLM passage selection on every crawled page"
+            },
+            "audio": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 4
+              },
+              "label": "audio extraction",
+              "description": "MP3 extraction on every crawled page"
+            },
+            "video": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 4
+              },
+              "label": "video extraction",
+              "description": "video extraction on every crawled page"
+            },
+            "redact_pii": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 4
+              },
+              "label": "PII redaction",
+              "description": "redaction on every crawled page"
+            },
+            "prompt_injection_check": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 4
+              },
+              "label": "prompt-injection check",
+              "description": "the `checkPromptInjection` guard on every crawled page"
+            },
+            "lockdown": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 4
+              },
+              "label": "lockdown cache read",
+              "description": "cache-only serving on every crawled page"
+            },
+            "zero_data_retention": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 1
+              },
+              "label": "zero data retention",
+              "description": "no page content persisted beyond the crawl"
+            },
+            "threat_protection_scan": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 2
+              },
+              "label": "threat-protection scan",
+              "description": "URL risk scan requested via `scrapeOptions.threatProtection.mode: normal`"
+            },
+            "x_routing": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 29
+              },
+              "label": "X (Grok) routing",
+              "description": "x.com / twitter.com pages are served through the Grok API instead of a browser"
+            },
+            "pdf_page": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 1
+              },
+              "label": "PDF pages beyond the first",
+              "description": "PDF parsing bills per page; the first of each document is covered by its page fee"
+            }
+          }
+        },
+        "credits": {
+          "default": {
+            "label": "Firecrawl credits"
+          }
+        }
+      }
+    },
+    {
+      "id": "firecrawl#crawl/{id}",
+      "provider": "firecrawl",
+      "usage": {
+        "model": {
+          "kind": "FREE"
+        },
+        "credits": {}
+      }
+    },
+    {
+      "id": "firecrawl#map",
+      "provider": "firecrawl",
+      "usage": {
+        "model": {
+          "kind": "PER_CALL",
+          "consumes": {
+            "credit": "default",
+            "amount": 1
+          },
+          "label": "map call",
+          "description": "one flat charge per call, any number of links"
+        },
+        "credits": {
+          "default": {
+            "label": "Firecrawl credits"
+          }
+        }
+      }
+    },
+    {
+      "id": "firecrawl#scrape",
+      "provider": "firecrawl",
+      "usage": {
+        "model": {
+          "kind": "COMPOSITE",
+          "components": {
+            "page": {
+              "kind": "PER_CALL",
+              "consumes": {
+                "credit": "default",
+                "amount": 1
+              },
+              "label": "page",
+              "description": "the page fetch — charged whenever Firecrawl returns a document, including pages that answered 403 or 404"
+            },
+            "json": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 4
+              },
+              "label": "JSON extraction",
+              "description": "LLM extraction via the `json` format"
+            },
+            "question": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 4
+              },
+              "label": "question answering",
+              "description": "LLM answer via the `question` format"
+            },
+            "highlights": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 4
+              },
+              "label": "highlights",
+              "description": "LLM passage selection via the `highlights` format"
+            },
+            "audio": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 4
+              },
+              "label": "audio extraction",
+              "description": "MP3 extraction via the `audio` format"
+            },
+            "video": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 4
+              },
+              "label": "video extraction",
+              "description": "video extraction via the `video` format"
+            },
+            "redact_pii": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 4
+              },
+              "label": "PII redaction",
+              "description": "redaction of personal data from the returned markdown"
+            },
+            "prompt_injection_check": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 4
+              },
+              "label": "prompt-injection check",
+              "description": "the opt-in `checkPromptInjection` guard on the `json` format"
+            },
+            "lockdown": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 4
+              },
+              "label": "lockdown cache read",
+              "description": "cache-only serving; the vendor bills this surcharge on a hit and nothing on a miss"
+            },
+            "zero_data_retention": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 1
+              },
+              "label": "zero data retention",
+              "description": "no page content persisted beyond the request"
+            },
+            "threat_protection_scan": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 2
+              },
+              "label": "threat-protection scan",
+              "description": "URL risk scan requested via `threatProtection.mode: normal`"
+            },
+            "x_routing": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 29
+              },
+              "label": "X (Grok) routing",
+              "description": "x.com / twitter.com URLs are served through the Grok API instead of a browser"
+            },
+            "pdf_page": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 1
+              },
+              "label": "PDF pages beyond the first",
+              "description": "PDF parsing bills per page; the first is already covered by the base page fee"
+            }
+          }
+        },
+        "credits": {
+          "default": {
+            "label": "Firecrawl credits"
+          }
+        }
+      }
+    },
+    {
+      "id": "firecrawl#search",
+      "provider": "firecrawl",
+      "usage": {
+        "model": {
+          "kind": "COMPOSITE",
+          "components": {
+            "search_block": {
+              "kind": "PER_UNIT",
+              "unit": "RESULT",
+              "every": 10,
+              "consumes": {
+                "credit": "default",
+                "amount": 2
+              },
+              "label": "search results",
+              "description": "2 credits per 10 results, rounded up"
+            },
+            "zdr_search": {
+              "kind": "PER_UNIT",
+              "unit": "RESULT",
+              "every": 10,
+              "consumes": {
+                "credit": "default",
+                "amount": 8
+              },
+              "label": "zero-data-retention search",
+              "description": "the surcharge that raises an end-to-end ZDR search block from 2 credits to 10"
+            },
+            "scraped_page": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 1
+              },
+              "label": "scraped results",
+              "description": "the base page fetch for each result scraped via scrapeOptions"
+            },
+            "json": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 4
+              },
+              "label": "JSON extraction",
+              "description": "LLM extraction on each scraped result"
+            },
+            "question": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 4
+              },
+              "label": "question answering",
+              "description": "LLM answer on each scraped result"
+            },
+            "highlights": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 4
+              },
+              "label": "highlights",
+              "description": "LLM passage selection on each scraped result (the `highlights` FORMAT, not the free search-snippet flag)"
+            },
+            "audio": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 4
+              },
+              "label": "audio extraction",
+              "description": "MP3 extraction on each scraped result"
+            },
+            "video": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 4
+              },
+              "label": "video extraction",
+              "description": "video extraction on each scraped result"
+            },
+            "pdf_page": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 1
+              },
+              "label": "PDF pages",
+              "description": "each parsed PDF page beyond the first, on any result scraped via scrapeOptions"
+            },
+            "redact_pii": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 4
+              },
+              "label": "PII redaction",
+              "description": "redaction on every parsed page of each scraped result, PDF pages included"
+            },
+            "prompt_injection_check": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 4
+              },
+              "label": "prompt-injection check",
+              "description": "the `checkPromptInjection` guard on each scraped result"
+            },
+            "lockdown": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 4
+              },
+              "label": "lockdown cache read",
+              "description": "cache-only serving on each scraped result"
+            },
+            "threat_protection_scan": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 2
+              },
+              "label": "threat-protection scan",
+              "description": "URL risk scan requested via `threatProtection.mode: normal`"
+            },
+            "x_routing": {
+              "kind": "PER_UNIT",
+              "unit": "PAGE",
+              "every": 1,
+              "consumes": {
+                "credit": "default",
+                "amount": 29
+              },
+              "label": "X (Grok) routing",
+              "description": "x.com / twitter.com results served through the Grok API when scraped"
+            }
+          }
+        },
+        "credits": {
+          "default": {
+            "label": "Firecrawl credits"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,467 @@
+{
+  "provider": "firecrawl",
+  "sources": [
+    {
+      "url": "https://docs.firecrawl.dev/billing",
+      "section": {
+        "from": "Credit costs per endpoint",
+        "to": "Tracking your usage"
+      },
+      "currency": "credits",
+      "verifiedAt": "2026-10-10",
+      "citedIn": "connectors/firecrawl/endpoints/crawl-status/endpoint.ts quotes this page (\"polling or checking batch status does not consume credits\")",
+      "lines": [
+        {
+          "key": "scrape_page",
+          "describe": "Scrape (and batch scrape) base cost per page returned",
+          "expect": {
+            "units": [
+              "page"
+            ],
+            "per": 1,
+            "regime": "per_unit"
+          },
+          "backs": [
+            {
+              "docId": "firecrawl#scrape",
+              "line": "page"
+            },
+            {
+              "docId": "firecrawl#batch/scrape",
+              "line": "page"
+            }
+          ]
+        },
+        {
+          "key": "crawl_page",
+          "describe": "Crawl base cost per page crawled",
+          "expect": {
+            "units": [
+              "page"
+            ],
+            "per": 1,
+            "regime": "per_unit"
+          },
+          "backs": [
+            {
+              "docId": "firecrawl#crawl",
+              "line": "page"
+            }
+          ]
+        },
+        {
+          "key": "map_call",
+          "describe": "Map endpoint, flat cost per call",
+          "expect": {
+            "units": [
+              "call"
+            ],
+            "per": 1,
+            "regime": "flat"
+          },
+          "backs": [
+            {
+              "docId": "firecrawl#map"
+            }
+          ]
+        },
+        {
+          "key": "search_results",
+          "describe": "Search endpoint cost per block of results",
+          "expect": {
+            "units": [
+              "result"
+            ],
+            "per": 10,
+            "regime": "per_unit"
+          },
+          "backs": [
+            {
+              "docId": "firecrawl#search",
+              "line": "search_block"
+            }
+          ]
+        },
+        {
+          "key": "agent",
+          "describe": "Agent endpoint (dynamic / usage-based pricing)",
+          "expect": {
+            "units": [
+              "credit",
+              "run"
+            ],
+            "per": 1,
+            "regime": "variable"
+          },
+          "backs": [
+            {
+              "docId": "firecrawl#agent"
+            }
+          ]
+        },
+        {
+          "key": "pdf_parsing",
+          "describe": "PDF parsing surcharge per PDF page",
+          "expect": {
+            "units": [
+              "pdf page"
+            ],
+            "per": 1,
+            "regime": "per_unit"
+          },
+          "backs": [
+            {
+              "docId": "firecrawl#scrape",
+              "line": "pdf_page"
+            },
+            {
+              "docId": "firecrawl#crawl",
+              "line": "pdf_page"
+            },
+            {
+              "docId": "firecrawl#batch/scrape",
+              "line": "pdf_page"
+            },
+            {
+              "docId": "firecrawl#search",
+              "line": "pdf_page"
+            }
+          ]
+        },
+        {
+          "key": "json_format",
+          "describe": "JSON format (LLM extraction) surcharge per page",
+          "expect": {
+            "units": [
+              "page"
+            ],
+            "per": 1,
+            "regime": "per_unit"
+          },
+          "backs": [
+            {
+              "docId": "firecrawl#scrape",
+              "line": "json"
+            },
+            {
+              "docId": "firecrawl#crawl",
+              "line": "json"
+            },
+            {
+              "docId": "firecrawl#batch/scrape",
+              "line": "json"
+            },
+            {
+              "docId": "firecrawl#search",
+              "line": "json"
+            }
+          ]
+        },
+        {
+          "key": "prompt_injection_check",
+          "describe": "Prompt injection check surcharge per page (the per-page option, not the 5-credit failure charge)",
+          "expect": {
+            "units": [
+              "page"
+            ],
+            "per": 1,
+            "regime": "per_unit"
+          },
+          "backs": [
+            {
+              "docId": "firecrawl#scrape",
+              "line": "prompt_injection_check"
+            },
+            {
+              "docId": "firecrawl#crawl",
+              "line": "prompt_injection_check"
+            },
+            {
+              "docId": "firecrawl#batch/scrape",
+              "line": "prompt_injection_check"
+            },
+            {
+              "docId": "firecrawl#search",
+              "line": "prompt_injection_check"
+            }
+          ]
+        },
+        {
+          "key": "zero_data_retention",
+          "describe": "Zero Data Retention (ZDR) surcharge per page",
+          "expect": {
+            "units": [
+              "page"
+            ],
+            "per": 1,
+            "regime": "per_unit"
+          },
+          "backs": [
+            {
+              "docId": "firecrawl#scrape",
+              "line": "zero_data_retention"
+            },
+            {
+              "docId": "firecrawl#crawl",
+              "line": "zero_data_retention"
+            },
+            {
+              "docId": "firecrawl#batch/scrape",
+              "line": "zero_data_retention"
+            }
+          ]
+        },
+        {
+          "key": "question_format",
+          "describe": "question or query format surcharge per page",
+          "expect": {
+            "units": [
+              "page"
+            ],
+            "per": 1,
+            "regime": "per_unit"
+          },
+          "backs": [
+            {
+              "docId": "firecrawl#scrape",
+              "line": "question"
+            },
+            {
+              "docId": "firecrawl#crawl",
+              "line": "question"
+            },
+            {
+              "docId": "firecrawl#batch/scrape",
+              "line": "question"
+            },
+            {
+              "docId": "firecrawl#search",
+              "line": "question"
+            }
+          ]
+        },
+        {
+          "key": "highlights_format",
+          "describe": "highlights format surcharge per page",
+          "expect": {
+            "units": [
+              "page"
+            ],
+            "per": 1,
+            "regime": "per_unit"
+          },
+          "backs": [
+            {
+              "docId": "firecrawl#scrape",
+              "line": "highlights"
+            },
+            {
+              "docId": "firecrawl#crawl",
+              "line": "highlights"
+            },
+            {
+              "docId": "firecrawl#batch/scrape",
+              "line": "highlights"
+            },
+            {
+              "docId": "firecrawl#search",
+              "line": "highlights"
+            }
+          ]
+        },
+        {
+          "key": "audio_format",
+          "describe": "audio format surcharge per page",
+          "expect": {
+            "units": [
+              "page"
+            ],
+            "per": 1,
+            "regime": "per_unit"
+          },
+          "backs": [
+            {
+              "docId": "firecrawl#scrape",
+              "line": "audio"
+            },
+            {
+              "docId": "firecrawl#crawl",
+              "line": "audio"
+            },
+            {
+              "docId": "firecrawl#batch/scrape",
+              "line": "audio"
+            },
+            {
+              "docId": "firecrawl#search",
+              "line": "audio"
+            }
+          ]
+        },
+        {
+          "key": "video_format",
+          "describe": "video format surcharge per page",
+          "expect": {
+            "units": [
+              "page"
+            ],
+            "per": 1,
+            "regime": "per_unit"
+          },
+          "backs": [
+            {
+              "docId": "firecrawl#scrape",
+              "line": "video"
+            },
+            {
+              "docId": "firecrawl#crawl",
+              "line": "video"
+            },
+            {
+              "docId": "firecrawl#batch/scrape",
+              "line": "video"
+            },
+            {
+              "docId": "firecrawl#search",
+              "line": "video"
+            }
+          ]
+        },
+        {
+          "key": "redact_pii",
+          "describe": "PII redaction surcharge per page",
+          "expect": {
+            "units": [
+              "page"
+            ],
+            "per": 1,
+            "regime": "per_unit"
+          },
+          "backs": [
+            {
+              "docId": "firecrawl#scrape",
+              "line": "redact_pii"
+            },
+            {
+              "docId": "firecrawl#crawl",
+              "line": "redact_pii"
+            },
+            {
+              "docId": "firecrawl#batch/scrape",
+              "line": "redact_pii"
+            },
+            {
+              "docId": "firecrawl#search",
+              "line": "redact_pii"
+            }
+          ]
+        },
+        {
+          "key": "lockdown_hit",
+          "describe": "lockdown (cache hit) surcharge per page",
+          "expect": {
+            "units": [
+              "page"
+            ],
+            "per": 1,
+            "regime": "per_unit"
+          },
+          "backs": [
+            {
+              "docId": "firecrawl#scrape",
+              "line": "lockdown"
+            },
+            {
+              "docId": "firecrawl#crawl",
+              "line": "lockdown"
+            },
+            {
+              "docId": "firecrawl#batch/scrape",
+              "line": "lockdown"
+            },
+            {
+              "docId": "firecrawl#search",
+              "line": "lockdown"
+            }
+          ]
+        },
+        {
+          "key": "threat_protection",
+          "describe": "Threat protection scan, cost per scanned URL",
+          "expect": {
+            "units": [
+              "url"
+            ],
+            "per": 1,
+            "regime": "per_unit"
+          },
+          "backs": [
+            {
+              "docId": "firecrawl#scrape",
+              "line": "threat_protection_scan"
+            },
+            {
+              "docId": "firecrawl#crawl",
+              "line": "threat_protection_scan"
+            },
+            {
+              "docId": "firecrawl#batch/scrape",
+              "line": "threat_protection_scan"
+            },
+            {
+              "docId": "firecrawl#search",
+              "line": "threat_protection_scan"
+            }
+          ]
+        }
+      ],
+      "excluded": [
+        {
+          "key": "interact",
+          "describe": "Interact / browser sessions, per browser minute",
+          "why": "no Monid endpoint for interact"
+        },
+        {
+          "key": "enhanced_proxy",
+          "describe": "Enhanced proxy, +0",
+          "why": "free modifier, nothing to pin"
+        },
+        {
+          "key": "prompt_injection_failed",
+          "describe": "5 credits once the checkPromptInjection guard has run on a failed scrape",
+          "why": "failure-path charge, settled by the vendor meter"
+        },
+        {
+          "key": "fire1_agent",
+          "describe": "FIRE-1 agent navigation, usage-based",
+          "why": "documented as not modeled in provider.ts"
+        },
+        {
+          "key": "lockdown_miss",
+          "describe": "lockdown cache miss, 1 credit",
+          "why": "documented as not modeled in provider.ts"
+        },
+        {
+          "key": "monitor_check",
+          "describe": "Monitor check errors, base 1 credit per page",
+          "why": "no Monid endpoint for monitor"
+        },
+        {
+          "key": "no_document",
+          "describe": "Firecrawl returned no document: 0 credits",
+          "why": "rule, not a rate"
+        },
+        {
+          "key": "document_returned",
+          "describe": "Firecrawl returned a document: 1 credit per page (restates the base cost)",
+          "why": "restates scrape_page"
+        },
+        {
+          "key": "crawl_preflight",
+          "describe": "Crawl pre-flight credit check uses 1 credit",
+          "why": "not a billed line"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,178 @@
+{
+  "source": "github.com/monid-ai/monid (MIT), compiled catalog",
+  "monidCommit": "b3e7b0c212e73039a691642e5624fc894096a1a7",
+  "exportedAt": "2026-10-09T20:53:56.561Z",
+  "docs": [
+    {
+      "id": "apollo#mixed_companies/search",
+      "provider": "apollo",
+      "usage": {
+        "model": {
+          "kind": "PER_UNIT",
+          "unit": "PAGE",
+          "every": 1,
+          "consumes": {
+            "credit": "default",
+            "amount": 1
+          },
+          "label": "pages",
+          "description": "search pages that returned at least one company"
+        },
+        "credits": {
+          "default": {
+            "label": "Apollo credits",
+            "description": "the workspace's Apollo credit balance; 1 credit per search page or matched record"
+          }
+        }
+      }
+    },
+    {
+      "id": "apollo#mixed_people/api_search",
+      "provider": "apollo",
+      "usage": {
+        "model": {
+          "kind": "FREE"
+        },
+        "credits": {}
+      }
+    },
+    {
+      "id": "apollo#news_articles/search",
+      "provider": "apollo",
+      "usage": {
+        "model": {
+          "kind": "PER_UNIT",
+          "unit": "PAGE",
+          "every": 1,
+          "consumes": {
+            "credit": "default",
+            "amount": 1
+          },
+          "label": "pages",
+          "description": "search pages that returned at least one article"
+        },
+        "credits": {
+          "default": {
+            "label": "Apollo credits",
+            "description": "the workspace's Apollo credit balance; 1 credit per search page or matched record"
+          }
+        }
+      }
+    },
+    {
+      "id": "apollo#organizations/enrich",
+      "provider": "apollo",
+      "usage": {
+        "model": {
+          "kind": "PER_UNIT",
+          "unit": "RESULT",
+          "every": 1,
+          "consumes": {
+            "credit": "default",
+            "amount": 1
+          },
+          "label": "matched companies",
+          "description": "companies Apollo matched to the identifiers"
+        },
+        "credits": {
+          "default": {
+            "label": "Apollo credits",
+            "description": "the workspace's Apollo credit balance; 1 credit per search page or matched record"
+          }
+        }
+      }
+    },
+    {
+      "id": "apollo#organizations/job_postings",
+      "provider": "apollo",
+      "usage": {
+        "model": {
+          "kind": "PER_UNIT",
+          "unit": "PAGE",
+          "every": 1,
+          "consumes": {
+            "credit": "default",
+            "amount": 1
+          },
+          "label": "pages",
+          "description": "pages that returned at least one job posting"
+        },
+        "credits": {
+          "default": {
+            "label": "Apollo credits",
+            "description": "the workspace's Apollo credit balance; 1 credit per search page or matched record"
+          }
+        }
+      }
+    },
+    {
+      "id": "apollo#organizations/show",
+      "provider": "apollo",
+      "usage": {
+        "model": {
+          "kind": "PER_UNIT",
+          "unit": "RESULT",
+          "every": 1,
+          "consumes": {
+            "credit": "default",
+            "amount": 1
+          },
+          "label": "companies",
+          "description": "company records returned"
+        },
+        "credits": {
+          "default": {
+            "label": "Apollo credits",
+            "description": "the workspace's Apollo credit balance; 1 credit per search page or matched record"
+          }
+        }
+      }
+    },
+    {
+      "id": "apollo#people/match",
+      "provider": "apollo",
+      "usage": {
+        "model": {
+          "kind": "PER_UNIT",
+          "unit": "RESULT",
+          "every": 1,
+          "consumes": {
+            "credit": "default",
+            "amount": 1
+          },
+          "label": "matched people",
+          "description": "people Apollo matched with demographics or an email"
+        },
+        "credits": {
+          "default": {
+            "label": "Apollo credits",
+            "description": "the workspace's Apollo credit balance; 1 credit per search page or matched record"
+          }
+        }
+      }
+    },
+    {
+      "id": "apollo#people/show",
+      "provider": "apollo",
+      "usage": {
+        "model": {
+          "kind": "PER_UNIT",
+          "unit": "RESULT",
+          "every": 1,
+          "consumes": {
+            "credit": "default",
+            "amount": 1
+          },
+          "label": "people",
+          "description": "person records returned"
+        },
+        "credits": {
+          "default": {
+            "label": "Apollo credits",
+            "description": "the workspace's Apollo credit balance; 1 credit per search page or matched record"
+          }
+        }
+      }
+    }
+  ]
+}

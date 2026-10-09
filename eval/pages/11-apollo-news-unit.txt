@@ -1,0 +1,55 @@
+Jump to Content
+HomeGet StartedAPIChangelogMCPCLIOpenAPI
+Get API key
+Get Started
+Get API key
+API Pricing and Credits
+API Pricing and Credits
+Some API endpoints consume Apollo credits. Credit consumption varies by Apollo plan. Check out the following sections to understand credits with Apollo API.
+⚠️
+Legacy Plans
+Credit usage shown here applies to currently available Apollo plans. If your workspace is on a legacy plan, API credit consumption may differ. To view the credit usage for your plan, launch Apollo and go to Settings > Billing and credits > About credits.
+How API Credit Usage Works
+API credit usage depends on the endpoint you call and the data Apollo returns.
+In general:
+Endpoints that create, update, list, or manage records consume 0 credits.
+Enrichment, organization search, news search, and AI insight endpoints may consume credits when qualifying data is returned.
+📖
+Page Turner
+Some credit-consuming endpoints may use credits across multiple requests. If you paginate through results or run repeated searches, your total credit usage can increase. Before running a large workflow, test with a small request and verify credit usage in Apollo.
+Endpoint Credit Usage
+The endpoints listed in the table below consume credits. All other Apollo API endpoints do not consume credits.
+Check out the following table to understand whether an endpoint consumes credits and under what conditions. For your organization's exact credit consumption, review your Apollo plan and credit usage.
+| Endpoint | Credit usage |
+| Run an Assistant task | Variable. Submitting a message and polling do not themselves consume credits. Actions performed by the Assistant, such as enrichment, can consume credits according to the action, your plan, and the data returned. There is no fixed per-task price. |
+| People enrichment | 1-9 credits per person, charged only if credit-consuming data is found: 1 credit for demographics/email; +8 credits if mobile phone is returned. The demographic credit depends on the match confidence : there is no demographic charge when match_confidence is none , and a low match is charged only if it returns data you didn ' t send. If waterfall enrichment is used for phone or email, credit usage depends on the returned data and the vendors included in your waterfall enrichment configuration ; some vendors consume credits per lookup even when no data is found. Email waterfall enrichment typically uses 1–4 credits, but some vendor configurations or successful higher-cost matches may result in 20+ credits. Phone waterfall enrichment typically uses 8–25 credits, but some configurations may result in 45+ credits. |
+| Bulk people enrichment | 1-9 credits per person, same logic as people enrichment; up to 10 people per request. If waterfall enrichment is used for phone or email, credit usage depends on the returned data and the vendors included in your waterfall enrichment configuration ; some vendors consume credits per lookup even when no data is found. Email waterfall enrichment typically uses 1–4 credits, but some vendor configurations or successful higher-cost matches may result in 20+ credits. Phone waterfall enrichment typically uses 8–25 credits, but some configurations may result in 45+ credits. |
+| Organization enrichment | 1 credit per organization. |
+| Bulk organization enrichment | 1 credit per organization. |
+| Organization search | 1 credit per page, up to 100 results per page. |
+| Organization job postings | 1 credit per page, up to 10,000 results per page. |
+| Get complete organization info | 1 credit per company. |
+| News articles search | 1 credit per article returned. |
+| Get conversations info | 1 credit per conversation if the conversation has AI insights; otherwise 0 credits . |
+| Export conversations | 1 credit per conversation if the conversation has AI insights; otherwise 0 credits . |
+| Get complete person info | 1 credit per person. |
+Estimate Credit Usage
+Use the following approach before running a large API job:
+Identify whether the endpoint consumes credits with this table.
+Check the charging unit, such as per matched record or per page.
+Run a small test request of your workflow.
+Review your credit usage in Apollo.
+Scale the workflow after you understand the credit impact.
+Track API Usage
+You can review API usage and rate limits any time in Apollo.
+Credit Usage
+To view your credit usage, go to Settings > Billing and credits > Credit usage. You can check usage by team or individual.
+Rate Limits
+Apollo applies rate limits to API calls to protect platform performance and reliability. Rate limits vary by endpoint and your Apollo plan.
+To view your rate limits, go to Settings > Integrations > API Keys > Usage. Alternatively, use the view usage endpoint to programmatically call usage data.
+If you exceed a rate limit, Apollo returns a 429 Too Many Requests response. Reduce request volume, wait for the limit window to reset, or upgrade your plan if your workflow requires higher limits.
+Updated 2 days ago
+Did this page help you?
+Yes
+No
+Copy Page
