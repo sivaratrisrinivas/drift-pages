@@ -1,0 +1,6 @@
+Task drift deno run --allow-read --allow-write --allow-env --allow-net=api.apify.com,docs.firecrawl.dev,exa.ai,docs.apollo.io,generativelanguage.googleapis.com,api.groq.com --allow-run=deno,git scripts/drift.ts '--provider' 'firecrawl'
+  https://docs.firecrawl.dev/billing: 29 rows, 1 rejected by the quote guard (gemini:gemini-3.5-flash, replayed)
+
+firecrawl: all 8 docs match live
+exit code: 0
+monid-ai/monid@b3e7b0c

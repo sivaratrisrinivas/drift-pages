@@ -46,7 +46,8 @@ async function groq(call: LlmCall, model: string): Promise<string> {
             model,
             temperature: 0,
             response_format: { type: "json_object" },
-            max_completion_tokens: 8192,
+            max_completion_tokens: 4400,
+            reasoning_effort: "low",
             messages: [
                 { role: "system", content: call.system },
                 { role: "user", content: call.user },
@@ -125,7 +126,7 @@ async function live(call: LlmCall): Promise<{ text: string; model: string }> {
                 return { text: await fn(call, model), model: spec };
             } catch (e) {
                 const status = (e as any).status;
-                errors.push(`${spec}: ${(e as Error).message.slice(0, 120)}`);
+                errors.push(`${spec}: ${(e as Error).message.slice(0, 400)}`);
                 // free-tier rate limit or overload: wait, retry, then fall back
                 const msg = (e as Error).message;
                 // a daily free-tier quota will not recover by waiting
